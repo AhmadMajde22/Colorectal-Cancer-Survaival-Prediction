@@ -1,0 +1,18 @@
+[project]
+name = "Cancer-Survival-Prediction"
+version = "0.1"
+dependencies = [
+    "pandas==2.3.0",
+    "numpy==1.26.4",
+    "scikit-learn==1.4.2",
+    "Flask==3.1.1",
+    "matplotlib==3.8.4",
+    "seaborn==0.13.2",
+    "mlflow==3.1.1",
+    "kfp==2.13.0",
+    "minio==7.2.15"
+]
+
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"

@@ -1,0 +1,3 @@
+data_ingestion:
+  bucket_name: "colorectal-cancer-dataset"
+  bucket_file_name: "colorectal_cancer_dataset.csv"
