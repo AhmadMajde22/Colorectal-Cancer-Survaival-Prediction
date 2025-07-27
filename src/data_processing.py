@@ -55,10 +55,12 @@ class DataProcessing:
                 self.label_encoders[col] = le
 
             logger.info("Label Encoding Done...")
-
+            for col, le in self.label_encoders.items():
+                mapping = dict(zip(le.classes_, le.transform(le.classes_)))
+                logger.info(f"Column: {col} | Mapping: {mapping}")
         except Exception as e:
-            logger.error(f"Error While encoding data {e}")
-            raise CustomException("Failed to encode data",str(e))
+                logger.error(f"Error While encoding data {e}")
+                raise CustomException("Failed to encode data",str(e))
 
     def feature_selection(self):
         try:
@@ -111,6 +113,8 @@ class DataProcessing:
             joblib.dump(y_test,os.path.join(self.output_path,"y_test.pkl"))
 
             joblib.dump(self.scaler,os.path.join(self.output_path,"scaler.pkl"))
+
+            joblib.dump(self.label_encoders,os.path.join(self.output_path,"label_encoders.pkl"))
 
             logger.info("Saveing Data done...")
 

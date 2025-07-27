@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Colorectal Cancer Survival Prediction</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class='container'>
+        <h2>Colorectal Cancer Survival Prediction</h2>
+        <form method='POST'>
+            <label>Healthcare Costs</label>
+            <input type='number' name='Healthcare_Costs' required>
+
+            <label>Tumor Size (mm)</label>
+            <input type='number' name='Tumor_Size_mm' required>
+
+            <label>Treatment Type</label>
+            <select name='Treatment_Type'>
+                <option value='Chemotherapy'>Chemotherapy</option>
+                <option value='Combination'>Combination</option>
+                <option value='Radiotherapy'>Radiotherapy</option>
+                <option value='Surgery'>Surgery</option>
+            </select>
+
+            <label>Diabetes</label>
+            <select name='Diabetes'>
+                <option value='No'>No</option>
+                <option value='Yes'>Yes</option>
+            </select>
+
+            <label>Age</label>
+            <input type='number' name='Age' required>
+
+            <label>Survival 5 Years</label>
+            <select name='Survival_5_years'>
+                <option value='No'>No</option>
+                <option value='Yes'>Yes</option>
+            </select>
+
+            <label>Mortality Rate per 100K</label>
+            <input type='number' name='Mortality_Rate_per_100K' required>
+
+            <label>Country</label>
+            <select name='Country'>
+                <option value='USA'>USA</option>
+                <option value='UK'>UK</option>
+                <option value='India'>India</option>
+                <option value='Germany'>Germany</option>
+                <option value='France'>France</option>
+                <option value='China'>China</option>
+                <option value='Japan'>Japan</option>
+                <option value='Australia'>Australia</option>
+            </select>
+
+            <label>Physical Activity</label>
+            <select name='Physical_Activity'>
+                <option value='High'>High</option>
+                <option value='Moderate'>Moderate</option>
+                <option value='Low'>Low</option>
+            </select>
+
+            <label>Insurance Status</label>
+            <select name='Insurance_Status'>
+                <option value='Insured'>Insured</option>
+                <option value='Uninsured'>Uninsured</option>
+            </select>
+
+            <label>Alcohol Consumption</label>
+            <select name='Alcohol_Consumption'>
+                <option value='No'>No</option>
+                <option value='Yes'>Yes</option>
+            </select>
+
+            <label>Cancer Stage</label>
+            <select name='Cancer_Stage'>
+                <option value='Localized'>Localized</option>
+                <option value='Regional'>Regional</option>
+                <option value='Metastatic'>Metastatic</option>
+            </select>
+
+            <label>Urban or Rural</label>
+            <select name='Urban_or_Rural'>
+                <option value='Urban'>Urban</option>
+                <option value='Rural'>Rural</option>
+            </select>
+
+            <label>Inflammatory Bowel Disease</label>
+            <select name='Inflammatory_Bowel_Disease'>
+                <option value='No'>No</option>
+                <option value='Yes'>Yes</option>
+            </select>
+
+            <label>Incidence Rate per 100K</label>
+            <input type='number' name='Incidence_Rate_per_100K' required>
+
+            <button type='submit'>Predict</button>
+        </form>
+
+        {% if prediction is not none %}
+        <div class="result">{{ prediction }}</div>
+        {% endif %}
+    </div>
+</body>
+
+</html>

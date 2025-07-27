@@ -1,0 +1,97 @@
+/* Global styles */
+body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: url('/static/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Form container */
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 40px 30px 30px 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* Heading */
+h2 {
+    text-align: center;
+    color: #ff6f61;
+    font-weight: 700;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+/* Form labels */
+label {
+    display: block;
+    margin-top: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Form inputs and selects */
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 7px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 15px;
+    background: #f9f9f9;
+    transition: border-color 0.2s;
+}
+
+/* Input & select focus state */
+input:focus,
+select:focus {
+    border-color: #ff6f61;
+    outline: none;
+}
+
+/* Submit button */
+button {
+    margin-top: 28px;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, #ff6f61 0%, #fda085 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(255, 111, 97, 0.15);
+    transition: background 0.2s;
+}
+
+
+
+/* Prediction result box */
+.result {
+    margin-top: 35px;
+    padding: 18px;
+    background: #f6d365;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 20px;
+    color: #333;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(246, 211, 101, 0.15);
+}
+
+/* Responsive for small screens */
+@media (max-width: 700px) {
+    .container {
+        padding: 20px 10px 15px 10px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+}
