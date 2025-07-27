@@ -27,25 +27,25 @@ pipeline {
                         sh "python3 -m venv ${env.VENV}"
                     }
                 }
-                sh "source ${env.VENV}/bin/activate && pip install --upgrade pip && pip install -r requirements.txt"
+                sh ". ${env.VENV}/bin/activate && pip install --upgrade pip && pip install -r requirements.txt"
             }
         }
 
         stage('Lint') {
             steps {
-                sh "source ${env.VENV}/bin/activate && pip install flake8 && flake8 src pipeline kubeflow_pipeline utils app.py application.py"
+                sh ". ${env.VENV}/bin/activate && pip install flake8 && flake8 src pipeline kubeflow_pipeline utils app.py application.py"
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh "source ${env.VENV}/bin/activate && pytest --maxfail=1 --disable-warnings"
+                sh ". ${env.VENV}/bin/activate && pytest --maxfail=1 --disable-warnings"
             }
         }
 
         stage('Train Model') {
             steps {
-                sh "source ${env.VENV}/bin/activate && python pipeline/training_pipeline.py"
+                sh ". ${env.VENV}/bin/activate && python pipeline/training_pipeline.py"
             }
         }
 
@@ -61,10 +61,10 @@ pipeline {
             archiveArtifacts artifacts: 'artifacts/**', allowEmptyArchive: true
         }
         success {
-            echo 'Pipeline completed successfully.'
+            echo '✅ Pipeline completed successfully.'
         }
         failure {
-            echo 'Pipeline failed.'
+            echo '❌ Pipeline failed.'
         }
     }
 }
