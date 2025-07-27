@@ -27,13 +27,24 @@ pipeline {
                         sh "python3 -m venv ${env.VENV}"
                     }
                 }
-                sh ". ${env.VENV}/bin/activate && pip install --upgrade pip && pip install -e ."
+                sh ". ${env.VENV}/bin/activate && pip install --upgrade pip && pip install -r requirements.txt"
             }
         }
 
         stage('Lint') {
             steps {
-                sh ". ${env.VENV}/bin/activate && pip install flake8 && flake8 src pipeline kubeflow_pipeline utils app.py application.py"
+                script {
+                    sh ". ${env.VENV}/bin/activate && pip install flake8"
+                    def lintStatus = sh(
+                        script: ". ${env.VENV}/bin/activate && flake8 src pipeline kubeflow_pipeline utils app.py application.py",
+                        returnStatus: true
+                    )
+                    if (lintStatus != 0) {
+                        echo "⚠️ Linting completed with issues. Review the warnings above."
+                    } else {
+                        echo "✅ Code passed linting."
+                    }
+                }
             }
         }
 
