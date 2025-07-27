@@ -1,5 +1,4 @@
 Cancer_Survival_Prediction.egg-info
-config/credentials.json
 logs
 mlruns
 MLFLOW_Credentials.txt
