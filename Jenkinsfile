@@ -24,34 +24,34 @@ pipeline {
             steps {
                 script {
                     if (!fileExists("${env.VENV}")) {
-                        bat "python -m venv ${env.VENV}"
+                        sh "python3 -m venv ${env.VENV}"
                     }
                 }
-                bat "${env.VENV}\\Scripts\\activate && pip install --upgrade pip && pip install -r requirements.txt"
+                sh "source ${env.VENV}/bin/activate && pip install --upgrade pip && pip install -r requirements.txt"
             }
         }
 
         stage('Lint') {
             steps {
-                bat "${env.VENV}\\Scripts\\activate && pip install flake8 && flake8 src pipeline kubeflow_pipeline utils app.py application.py"
+                sh "source ${env.VENV}/bin/activate && pip install flake8 && flake8 src pipeline kubeflow_pipeline utils app.py application.py"
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat "${env.VENV}\\Scripts\\activate && pytest --maxfail=1 --disable-warnings"
+                sh "source ${env.VENV}/bin/activate && pytest --maxfail=1 --disable-warnings"
             }
         }
 
         stage('Train Model') {
             steps {
-                bat "${env.VENV}\\Scripts\\activate && python pipeline/training_pipeline.py"
+                sh "source ${env.VENV}/bin/activate && python pipeline/training_pipeline.py"
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                bat "docker build -t cancer-survival-app ."
+                sh "docker build -t cancer-survival-app ."
             }
         }
     }
