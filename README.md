@@ -57,20 +57,111 @@ The main models used are RandomForestClassifier and XGBoostClassifier, chosen fo
 ## Project Structure
 
 ```
-.
-├── app.py, application.py         # Flask web app
-├── pipeline/                     # Training pipeline scripts
-├── kubeflow_pipeline/            # Kubeflow pipeline definition
-├── src/                          # Core ML modules (data, model, logger, exceptions)
-├── config/                       # YAML/JSON configs
-├── artifacts/                    # Saved models, encoders, scalers, datasets
-├── mlruns/                       # MLflow experiment logs
-├── static/, templates/           # Web app assets
-├── requirements.txt, setup.py    # Dependencies
-├── Dockerfile                    # Containerization
-├── README.md                     # Project documentation
-└── notebook/                     # Jupyter notebook for exploration
+Colorectal-Cancer-Survaival-Prediction/
+├── app.py, application.py           # Main Flask web application for serving predictions
+│   - Handles HTTP requests, loads trained model, and returns predictions
+│   - Connects frontend (HTML/CSS) with backend ML logic
+├── pipeline/
+│   ├── __init__.py                  # Pipeline module initializer
+│   └── training_pipeline.py         # Main script for orchestrating the ML pipeline
+│       - Loads config, runs data ingestion, preprocessing, training, evaluation, and saves artifacts
+├── kubeflow_pipeline/
+│   ├── __init__.py                  # Kubeflow pipeline module initializer
+│   └── pipeline.py                  # Kubeflow pipeline definition and orchestration
+│       - Automates pipeline steps for scalable, reproducible ML workflows
+├── src/
+│   ├── __init__.py                  # Source module initializer
+│   ├── custom_exception.py          # Custom exception handling for robust error management
+│   ├── data_ingestion.py            # Loads raw data, validates schema, handles missing values
+│   ├── data_processing.py           # Cleans, encodes, and scales features
+│   ├── logger.py                    # Centralized logging for debugging and monitoring
+│   ├── model_training.py            # Trains, tunes, and evaluates ML models
+│   └── __pycache__/                 # Python cache files
+├── config/
+│   ├── __init__.py                  # Config module initializer
+│   ├── config.yaml                  # Main configuration file (paths, parameters, model settings)
+│   ├── credentials.json             # Credentials for external services (e.g., cloud, databases)
+│   ├── path_config.py               # Utility for managing file paths
+│   └── __pycache__/                 # Python cache files
+├── artifacts/
+│   ├── models/
+│   │   └── model.pkl                # Trained model file (best performing model)
+│   ├── processed/
+│   │   ├── label_encoders.pkl       # Saved label encoders for categorical features
+│   │   ├── scaler.pkl               # Saved scaler for feature normalization
+│   │   ├── X_test.pkl               # Test features
+│   │   ├── X_train.pkl              # Train features
+│   │   ├── y_test.pkl               # Test labels
+│   │   └── y_train.pkl              # Train labels
+│   └── raw/
+│       └── data.csv                 # Raw input dataset (clinical data)
+├── mlruns/
+│   └── ...                          # MLflow experiment tracking files and folders
+│       - Stores runs, metrics, parameters, and artifacts for each experiment
+├── static/
+│   ├── background.jpg               # Web app background image
+│   └── style.css                    # Web app CSS styles
+├── templates/
+│   └── index.html                   # Web app HTML template (user interface)
+├── utils/
+│   ├── __init__.py                  # Utils module initializer
+│   └── common_functions.py          # Utility functions for data and model operations
+│   └── __pycache__/                 # Python cache files
+├── logs/
+│   └── log_YYYY-MM-DD.log           # Log files for pipeline and app (debugging, audit trail)
+├── requirements.txt                 # Python dependencies (all required packages)
+├── setup.py                         # Project setup script (for packaging and distribution)
+├── pyproject.toml                   # Project metadata and build system configuration
+├── Dockerfile                       # Docker container specification (for deployment)
+├── README.md                        # Project documentation (this file)
+├── Cancer_Survival_Prediction.egg-info/
+│   └── ...                          # Python package metadata (for distribution)
+└── notebook/
+    └── notebook.ipynb               # Jupyter notebook for exploration, EDA, and testing
 ```
+
+**Project Organization Details:**
+
+- **Web Application:**
+  - `app.py` and `application.py` serve as the entry point for the Flask web app, allowing users to interact with the model via a browser.
+  - Uses HTML templates and CSS for a user-friendly interface.
+
+- **ML Pipeline:**
+  - The `pipeline/` folder contains scripts for orchestrating the end-to-end ML workflow, from data ingestion to model deployment.
+  - The pipeline is modular, allowing easy updates and experimentation.
+
+- **Kubeflow Integration:**
+  - The `kubeflow_pipeline/` folder enables scalable and automated ML workflows using Kubeflow.
+  - Pipelines can be run locally or on cloud infrastructure.
+
+- **Source Code:**
+  - The `src/` folder contains all core logic for data handling, preprocessing, model training, and logging.
+  - Custom exceptions and logging ensure robustness and traceability.
+
+- **Configuration:**
+  - The `config/` folder centralizes all configuration files and credentials, making the project flexible and secure.
+
+- **Artifacts:**
+  - The `artifacts/` folder stores all outputs from the pipeline, including trained models, encoders, scalers, and datasets.
+  - Ensures reproducibility and versioning of results.
+
+- **Experiment Tracking:**
+  - The `mlruns/` folder is managed by MLflow, tracking all experiments, metrics, and parameters for model development.
+
+- **Utilities:**
+  - The `utils/` folder provides helper functions for common tasks, improving code reuse and maintainability.
+
+- **Logs:**
+  - The `logs/` folder contains log files for monitoring pipeline and app execution.
+
+- **Testing and Exploration:**
+  - The `notebook/` folder includes Jupyter notebooks for exploratory data analysis, prototyping, and testing.
+
+- **Packaging and Deployment:**
+  - `requirements.txt`, `setup.py`, `pyproject.toml`, and `Dockerfile` support installation, packaging, and containerization for local or cloud deployment.
+
+- **Documentation:**
+  - `README.md` provides comprehensive documentation for users and contributors.
 
 ## Pipeline Steps
 
