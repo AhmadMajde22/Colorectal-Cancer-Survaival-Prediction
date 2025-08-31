@@ -290,17 +290,4 @@ Tracks experiments, parameters, and metrics in `mlruns/`. View results with `mlf
 - **Encoders/Scalers:** `artifacts/processed/`
 - **Datasets:** `artifacts/raw/`, `artifacts/processed/`
 
-## Testing
 
-- Unit tests and notebook exploration in `notebook/notebook.ipynb`.
-- Logs available in `logs/`.
-
-## Contributing
-
-Contributions are welcome! Please fork the repo and submit a pull request.
-
-## License
-
-This project is licensed under the MIT License.
-
----
